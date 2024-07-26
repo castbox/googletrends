@@ -65,10 +65,10 @@ type dailyOut struct {
 }
 
 type trendingSearchesDays struct {
-	Searches []*trendingSearchDays `json:"trendingSearchesDays" bson:"trending_search_days"`
+	Searches []*TrendingSearchDays `json:"trendingSearchesDays" bson:"trending_search_days"`
 }
 
-type trendingSearchDays struct {
+type TrendingSearchDays struct {
 	FormattedDate string            `json:"formattedDate" bson:"formatted_date"`
 	Searches      []*TrendingSearch `json:"trendingSearches" bson:"searches"`
 }

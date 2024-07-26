@@ -46,6 +46,24 @@ func Daily(ctx context.Context, hl, loc string) ([]*TrendingSearch, error) {
 	return searches, nil
 }
 
+// DailyTrendingSearch gets daily trends descending ordered by days and articles corresponding to it.
+func DailyTrendingSearch(ctx context.Context, hl, loc string) ([]*TrendingSearchDays, error) {
+	data, err := client.trends(ctx, gAPI+gDaily, hl, loc)
+	if err != nil {
+		return nil, err
+	}
+
+	// google api returns not valid json :(
+	str := strings.Replace(data, ")]}',", "", 1)
+
+	out := new(dailyOut)
+	if err := client.unmarshal(str, out); err != nil {
+		return nil, err
+	}
+
+	return out.Default.Searches, nil
+}
+
 // Realtime represents realtime trends with included articles and sources.
 func Realtime(ctx context.Context, hl, loc, cat string) ([]*TrendingStory, error) {
 	if !client.validateCategory(cat) {

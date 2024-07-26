@@ -36,6 +36,15 @@ func TestDailyTrending(t *testing.T) {
 	assert.True(t, len(resp[0].Title.Query) > 0)
 }
 
+func TestDailyTrendingSearch(t *testing.T) {
+	_, err := DailyTrendingSearch(context.Background(), "unknown", "Kashyyyk")
+	assert.Error(t, err)
+
+	resp, err := DailyTrendingSearch(context.Background(), langEN, locUS)
+	assert.NoError(t, err)
+	assert.True(t, len(resp) > 0)
+}
+
 func TestRealtimeTrending(t *testing.T) {
 	categories := TrendsCategories()
 	assert.True(t, len(categories) > 0)
