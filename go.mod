@@ -1,4 +1,4 @@
-module github.com/groovili/gogtrends
+module github.com/castbox/googletrends
 
 go 1.14
 

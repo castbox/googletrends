@@ -10,7 +10,7 @@ All contributions, updates and issues are warmly welcome.
 
 ### Installation 
 
-``go get -u github.com/groovili/gogtrends``
+``go get -u github.com/castbox/googletrends``
 
 #### Debug
 
@@ -37,6 +37,8 @@ Please notice, when you call **Explore** method for keywords comparison, two fir
 ### Available methods
 
 * `Daily(ctx context.Context, hl, loc string) ([]*TrendingSearch, error)` - daily trends descending ordered by days and articles corresponding to it.
+
+* `DailyTrendingSearch(ctx context.Context, hl, loc string) ([]*TrendingSearchDays, error)` - daily trends descending ordered by days and articles corresponding to it.
 
 * `Realtime(ctx context.Context, hl, loc, cat string) ([]*TrendingStory, error)` - represents realtime trends with included articles and sources.
 
