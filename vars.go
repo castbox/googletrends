@@ -20,6 +20,9 @@ const (
 	gSIntOverReg   = "/widgetdata/comparedgeo"
 	gSAutocomplete = "/autocomplete"
 
+	// New API endpoint for batch execute
+	gBatchExecute = "https://trends.google.com/_/TrendsUi/data/batchexecute"
+
 	paramHl    = "hl"
 	paramCat   = "cat"
 	paramGeo   = "geo"
