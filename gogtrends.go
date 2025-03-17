@@ -24,7 +24,8 @@ func TrendsCategories() map[string]string {
 }
 
 // Daily gets daily trends descending ordered by days and articles corresponding to it.
-// This function now uses the new Google Trends API.
+// Deprecated: This function uses the old Google Trends API which may be unstable.
+// Use DailyNew instead, which uses the new Google Trends API.
 func Daily(ctx context.Context, hl, loc string) ([]*TrendingSearch, error) {
 	// Try the new API first
 	terms, err := client.trendsNew(ctx, hl, loc)
@@ -72,6 +73,8 @@ func Daily(ctx context.Context, hl, loc string) ([]*TrendingSearch, error) {
 }
 
 // DailyTrendingSearch gets daily trends descending ordered by days and articles corresponding to it.
+// Deprecated: This function uses the old Google Trends API which may be unstable.
+// Use DailyTrendingSearchNew instead, which uses the new Google Trends API.
 func DailyTrendingSearch(ctx context.Context, hl, loc string) ([]*TrendingSearchDays, error) {
 	data, err := client.trends(ctx, gAPI+gDaily, hl, loc)
 	if err != nil {
@@ -90,6 +93,8 @@ func DailyTrendingSearch(ctx context.Context, hl, loc string) ([]*TrendingSearch
 }
 
 // Realtime represents realtime trends with included articles and sources.
+// Deprecated: This function uses the old Google Trends API which may be unstable.
+// Consider using the new API methods for more reliable results.
 func Realtime(ctx context.Context, hl, loc, cat string) ([]*TrendingStory, error) {
 	if !client.validateCategory(cat) {
 		return nil, ErrInvalidCategory
@@ -112,6 +117,7 @@ func Realtime(ctx context.Context, hl, loc, cat string) ([]*TrendingStory, error
 }
 
 // ExploreCategories gets available categories for explore and comparison and caches it in client.
+// Deprecated: This function uses the old Google Trends API which may be unstable.
 func ExploreCategories(ctx context.Context) (*ExploreCatTree, error) {
 	if cats := client.getCategories(); cats != nil {
 		return cats, nil
@@ -139,6 +145,7 @@ func ExploreCategories(ctx context.Context) (*ExploreCatTree, error) {
 }
 
 // ExploreLocations gets available locations for explore and comparison and caches it in client.
+// Deprecated: This function uses the old Google Trends API which may be unstable.
 func ExploreLocations(ctx context.Context) (*ExploreLocTree, error) {
 	if locs := client.getLocations(); locs != nil {
 		return locs, nil

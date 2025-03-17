@@ -36,11 +36,19 @@ Please notice, when you call **Explore** method for keywords comparison, two fir
 
 ### Available methods
 
-* `Daily(ctx context.Context, hl, loc string) ([]*TrendingSearch, error)` - daily trends descending ordered by days and articles corresponding to it.
+#### New API Methods
 
-* `DailyTrendingSearch(ctx context.Context, hl, loc string) ([]*TrendingSearchDays, error)` - daily trends descending ordered by days and articles corresponding to it.
+* `DailyNew(ctx context.Context, hl, loc string) ([]*TrendingSearch, error)` - daily trends using the new Google Trends API.
 
-* `Realtime(ctx context.Context, hl, loc, cat string) ([]*TrendingStory, error)` - represents realtime trends with included articles and sources.
+* `DailyTrendingSearchNew(ctx context.Context, hl, loc string) ([]*TrendingSearchDays, error)` - daily trends ordered by days using the new Google Trends API.
+
+#### Legacy API Methods (Deprecated)
+
+* `Daily(ctx context.Context, hl, loc string) ([]*TrendingSearch, error)` - daily trends descending ordered by days and articles corresponding to it. (Deprecated: Use DailyNew instead)
+
+* `DailyTrendingSearch(ctx context.Context, hl, loc string) ([]*TrendingSearchDays, error)` - daily trends descending ordered by days and articles corresponding to it. (Deprecated: Use DailyTrendingSearchNew instead)
+
+* `Realtime(ctx context.Context, hl, loc, cat string) ([]*TrendingStory, error)` - represents realtime trends with included articles and sources. (Deprecated)
 
 * `Search(ctx context.Context, word, hl string) ([]*KeywordTopic, error)` - Words/Topics related (5 results max) with your search.
 
@@ -54,9 +62,9 @@ Please notice, when you call **Explore** method for keywords comparison, two fir
 
 * `TrendsCategories() map[string]string` - available categories for `Realtime` trends.
 
-* `ExploreCategories(ctx context.Context) (*ExploreCatTree, error)` - tree of categories for explore and comparison. Called once, then returned from cache.
+* `ExploreCategories(ctx context.Context) (*ExploreCatTree, error)` - tree of categories for explore and comparison. Called once, then returned from cache. (Deprecated)
 
-* `ExploreLocations(ctx context.Context) (*ExploreLocTree, error)` - tree of locations for explore and comparison. Called once, then returned from cache.
+* `ExploreLocations(ctx context.Context) (*ExploreLocTree, error)` - tree of locations for explore and comparison. Called once, then returned from cache. (Deprecated)
 
 #### Parameters 
 
@@ -74,8 +82,24 @@ Please notice, when you call **Explore** method for keywords comparison, two fir
 
 Working detailed examples for all methods and cases can be found in ***example*** folder. Short version below.
 
+#### Using New API Methods (Recommended)
+
 ```go
-// Daily trends
+// Daily trends using new API
+ctx := context.Background()
+dailySearches, err := gogtrends.DailyNew(ctx, "EN", "US")
+```
+
+```go
+// Daily trending searches by days using new API
+ctx := context.Background()
+trendingSearchDays, err := gogtrends.DailyTrendingSearchNew(ctx, "EN", "US")
+```
+
+#### Using Legacy API Methods (Deprecated)
+
+```go
+// Daily trends using legacy API
 ctx := context.Background()
 dailySearches, err := gogtrends.Daily(ctx, "EN", "US")
 ```
